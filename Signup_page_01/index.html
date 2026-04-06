@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Anarchist-Society" />
+    <meta name="description" content="A fucking SignUp" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Fuck SignUp</title>
+  </head>
+
+  <body>
+    <main>
+      <div class="circle" aria-hidden="true"></div>
+      <!-- Para ocultar este elemento a los lectores de pantalla -->
+
+      <div class="card">
+        <div class="logo" aria-hidden="true">
+          <i class="bx bx-bitcoin"></i>
+        </div>
+
+        <h1>Create Account</h1>
+
+        <!-- role="form" es para que los lectores de pantalla sepan que esto es un formulario -->
+        <!-- aria-labelledby="form-title" significa que este formulario está etiquetado por el span con id form-title -->
+        <form class="form" role="form" aria-labelledby="form-title">
+          <span id="form-title" class="sr-only">Sign up form</span>
+
+          <input
+            id="name"
+            type="text"
+            name="name"
+            autocomplete="name"
+            required
+            aria-required="true"
+            placeholder="Name"
+          />
+
+          <input
+            id="email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            required
+            aria-required="true"
+            placeholder="Email"
+          />
+
+          <input
+            id="password"
+            type="password"
+            name="password"
+            autocomplete="new-password"
+            required
+            aria-required="true"
+            minlength="8"
+            placeholder="Password"
+          />
+
+          <button type="submit">SIGN UP</button>
+        </form>
+
+        <footer>
+          Existing users, sign in
+          <a href="#">Here</a>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>
