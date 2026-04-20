@@ -6,6 +6,7 @@
     <meta name="author" content="Anarchist-Society" />
     <meta name="description" content="A fucking Responsive Navbar" />
     <link rel="stylesheet" href="style.css" />
+    <!-- Cargamos los iconos de Google Material Icons (la librería que nos da el icono de la hamburguesa ) -->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -16,14 +17,33 @@
   <body>
     <main>
       <nav class="navbar">
+        <!-- OVERLAY (capa oscura de fondo)
+        En CSS tiene position: fixed y bubre toda la pantalla (width/height: 100%).
+        Por defecto es invisible (opacity: 0, visibility: hidden).
+        Cuando body tiene la clase "open", el CSS lo hace visible.
+        El onclick cierra el menu si el usuario toca fuera de él.
+        En pantalla grandes (min-width: 600px) el  CSS lo oculta con display: none -->
         <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
+        <!-- Cuando este div reciba un click llama a la función toggleMenuOpen() -->
+        <!-- El onclick es un atributo de evento HTML-->
 
+        <!-- BOTÓN HAMBURGUESA:
+        Tiene position: absolute para colocarse arriba a la izquierda
+        y usa display: grid + place-items: center para centrar el icono.
+        Esto funciona porque tiene width y height.
+        En pantallas grandes (min-width: 600px) el css lo oculta con display: none. -->
         <button class="navbar-burger" onclick="toggleMenuOpen()">
+          <!-- Cuando este div reciba un click llama a la función toggleMenuOpen() -->
+          <!-- El onclick es un atributo de evento HTML-->
           <span class="material-icons">menu</span>
         </button>
 
+        <!-- En CSS tiene font-size: 16px y se centra gracias al justify-content: center del padre .navbar -->
         <h1 class="navbar-title">A another Fucking Navbar</h1>
 
+        <!-- MENÚ DE NAVEGACIÓN:
+        En móvil: está fuera de pantalla por defecto (translate: -100% 0) y es invisible (visibility: hidden).
+        Cuando body tiene la clase "open" el CSS lo desliza hacia dentro (translate: 0 0)-->
         <nav class="navbar-menu">
           <button type="button" class="active">Youtube</button>
           <button type="button" class="active">Archive</button>
@@ -32,6 +52,10 @@
       </nav>
 
       <script type="text/javascript">
+        // Esta es una función javascript, toggleMenuOpen es el nombre que le damos a la función
+        // document.body -> accede al elemento <body>
+        // .classList -> es la lista de clases CSS que tiene ese elemento
+        // .toggle("open") -> añade o quita esa clase
         const toggleMenuOpen = () => document.body.classList.toggle("open");
       </script>
     </main>
