@@ -41,4 +41,93 @@ button {
   z-index: 2;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+body.open .navbar-overlay {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Estilos para el icono burger */
+.navbar-burger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center; /* Si queremos centrarlo con esta propiedad tenemos que tener un width y un height */
+  width: 64px; /* Es obligatorio darle un width si queremos centrarlo con grid */
+  height: 64px; /* Es obligatorio darle un height si queremos centrarlo con un grid */
+  padding: 0;
+}
+
+/* Estilos para el título dentro del navbar */
+.navbar-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.navbar-menu {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  translate: -100% 0;
+  width: 270px;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #000;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+body.open .navbar-menu {
+  translate: 0 0;
+  visibility: visible;
+}
+
+.navbar-menu > button {
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  padding: 0 8px;
+  transition: all 0.3s;
+}
+
+.navbar-menu > button.active {
+  color: inherit;
+}
+
+.navbar-menu > button:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar {
+    justify-content: space-between;
+    padding: 0 0 0 16px;
+  }
+
+  .navbar-overlay {
+    display: none;
+  }
+
+  .navbar-burger {
+    display: none;
+  }
+
+  .navbar-menu {
+    position: static;
+    translate: 0 0;
+    width: auto;
+    background-color: transparent;
+    flex-direction: row;
+    visibility: visible;
+  }
 }
