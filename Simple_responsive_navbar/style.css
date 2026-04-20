@@ -4,12 +4,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 body {
   background-color: #3b3d43;
 }
 
+/* Estilos para los botones */
 button {
   border: 0;
   padding: 0;
@@ -19,6 +21,7 @@ button {
   cursor: pointer;
 }
 
+/* Estilo general del navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -34,6 +37,7 @@ button {
   font-family: "Poppins";
 }
 
+/* Estilos para la capa oscura de fondo, por defecto desabilitada */
 .navbar-overlay {
   position: fixed;
   top: 0;
@@ -47,6 +51,7 @@ button {
   transition: 0.5s;
 }
 
+/* Cuando el body tiene la clase open se aplica este css */
 body.open .navbar-overlay {
   visibility: visible;
   opacity: 1;
@@ -67,22 +72,23 @@ body.open .navbar-overlay {
 /* Estilos para el título dentro del navbar */
 .navbar-title {
   margin: 0;
-  font-size: 16px;
+  font-size: 1.5rem;
 }
 
+/* Estilos general para el menú lateral solo en móviles, por defecto no se vé porque está fuera de la pantalla */
 .navbar-menu {
   position: fixed;
   z-index: 3;
   top: 0;
   left: 0;
   translate: -100% 0;
-  width: 270px;
+  width: 150px;
   height: 100%;
   padding: 20px;
   display: flex;
-  gap: 8px;
+  gap: 20px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   background: #000;
   visibility: hidden;
   transition: all 0.3s;
@@ -98,6 +104,7 @@ body.open .navbar-menu {
   background: transparent;
   padding: 0 8px;
   transition: all 0.3s;
+  font-size: 1rem;
 }
 
 .navbar-menu > button.active {
@@ -108,6 +115,7 @@ body.open .navbar-menu {
   color: rgba(255, 255, 255, 0.75);
 }
 
+/* Para pantallas más grandes */
 @media only screen and (min-width: 600px) {
   .navbar {
     justify-content: space-between;
@@ -115,11 +123,11 @@ body.open .navbar-menu {
   }
 
   .navbar-overlay {
-    display: none;
+    display: none; /* Ocultamos el OVERLAY (capa oscura de fondo) */
   }
 
   .navbar-burger {
-    display: none;
+    display: none; /* Ocultamos el icono burger */
   }
 
   .navbar-menu {
