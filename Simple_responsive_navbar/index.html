@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Anarchist-Society" />
-    <meta name="description" content="A fucking " />
+    <meta name="description" content="A fucking Responsive Navbar" />
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -18,8 +18,22 @@
       <nav class="navbar">
         <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
 
-        <button class="navbar-burger" onclick="toggleMenuOpen()"></button>
+        <button class="navbar-burger" onclick="toggleMenuOpen()">
+          <span class="material-icons">menu</span>
+        </button>
+
+        <h1 class="navbar-title">A another Fucking Navbar</h1>
+
+        <nav class="navbar-menu">
+          <button type="button" class="active">Youtube</button>
+          <button type="button" class="active">Archive</button>
+          <button type="button">Projects</button>
+        </nav>
       </nav>
+
+      <script type="text/javascript">
+        const toggleMenuOpen = () => document.body.classList.toggle("open");
+      </script>
     </main>
   </body>
 </html>
