@@ -1,35 +1,48 @@
+<!-- ============ DOCTYPE: le dice al navegador que esto es HTML5 ============ -->
 <!doctype html>
 <html lang="en">
+<!-- lang="en" indica el idioma principal (inglés) para accesibilidad y SEO -->
   <head>
     <meta charset="UTF-8" />
+    <!-- charset="UTF-8" permite usar caracteres especiales como tildes, ñ, emojis, etc. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- El meta viewport hace que la página se vea bien en celulares (responsive design) -->
     <meta name="author" content="Anarchist-Society" />
     <meta name="description" content="A fucking SignUp" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <!-- Boxicons: librería de íconos traída desde un CDN (no necesitamos descargar nada) -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Enlazamos nuestro propio archivo CSS donde escribimos los estilos -->
     <title>SignUp Page 01</title>
   </head>
 
   <body>
+    <!-- <main> = etiqueta semántica que agrupa el contenido principal de la página -->
     <main>
+      <!-- .circle = círculo decorativo animado de fondo (solo estética, sin contenido real) -->
       <div class="circle" aria-hidden="true"></div>
       <!-- Para ocultar este elemento a los lectores de pantalla -->
 
+      <!-- .card = contenedor tipo "tarjeta" blanco que agrupa el formulario -->
       <div class="card">
+        <!-- .logo = ícono decorativo de Bitcoin dentro de un círculo -->
         <div class="logo" aria-hidden="true">
           <i class="bx bx-bitcoin"></i>
         </div>
 
+        <!-- Título principal del formulario de registro -->
         <h1>Create Account</h1>
 
+        <!-- <form> agrupa los inputs y los envía al servidor cuando se hace clic en el botón -->
         <!-- role="form" es para que los lectores de pantalla sepan que esto es un formulario -->
         <!-- aria-labelledby="form-title" significa que este formulario está etiquetado por el span con id form-title -->
         <form class="form" role="form" aria-labelledby="form-title">
           <span id="form-title" class="sr-only">Sign up form</span>
 
+          <!-- input type="text" = campo de una sola línea. required = obligatorio. autocomplete = ayuda al navegador a rellenar -->
           <input
             id="name"
             type="text"
@@ -40,6 +53,7 @@
             placeholder="Name"
           />
 
+          <!-- type="email" valida automáticamente que el texto tenga formato de correo (user@dominio.com) -->
           <input
             id="email"
             type="email"
@@ -50,6 +64,7 @@
             placeholder="Email"
           />
 
+          <!-- type="password" oculta los caracteres escritos. minlength="8" exige al menos 8 caracteres -->
           <input
             id="password"
             type="password"
@@ -61,9 +76,11 @@
             placeholder="Password"
           />
 
+          <!-- type="submit" = al hacer clic envía el formulario. "SIGN UP" en mayúsculas es decisión de diseño -->
           <button type="submit">SIGN UP</button>
         </form>
 
+        <!-- footer con enlace para "usuarios existentes" (href="#" es un placeholder, aún no lleva a ninguna parte) -->
         <footer>
           Existing users, sign in
           <a href="#">Here</a>
