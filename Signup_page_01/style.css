@@ -1,15 +1,22 @@
+/* @import trae la fuente "Ubuntu" desde Google Fonts para usarla en toda la página */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
+/* El selector universal (*) aplica estos estilos a TODOS los elementos de la página */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  /* border-box hace que el padding y el border NO sumen al ancho total del elemento */
 }
 
+/* html con height: 100% para que ocupe todo el alto de la ventana del navegador */
 html {
-  height: 100%;
+  height: 100vh;
 }
 
+/* body también mide 100% de alto. display: grid + place-items: center centra todo vertical y horizontalmente */
 body {
-  height: 100%;
+  height: 100vh;
   display: grid;
   place-items: center;
   margin: 0;
@@ -19,24 +26,30 @@ body {
   animation: rotate 6s infinite alternate linear; /* */
 }
 
+/* min-width: 400px evita que el contenido se encoja demasiado en pantallas pequeñas */
 main {
   min-width: 400px;
 }
 
+/* .circle = círculo decorativo celeste fijo en la esquina superior izquierda */
 .circle {
   position: fixed;
+  /* fixed = se queda fijo en la ventana aunque hagamos scroll */
   top: -50vmin; /* vmin = 1% del lado más pequeño de la ventana */
   left: -50vmin; /* vmin = 1% del lado más pequeño de la ventana */
   width: 100vmin; /* vmin = 1% del lado más pequeño de la ventana */
   height: 100vmin; /* vmin = 1% del lado más pequeño de la ventana */
-  border-radius: 47% 53% 61% 39% / 45% 51% 49% 55%; /**/
+  border-radius: 47% 53% 61% 39% / 45% 51% 49% 55%; /* bordes irregulares para forma orgánica */
   background-color: #65c8ff;
 }
 
 /* inherit -> que lo herede del padre */
+/* .circle::after = pseudo-elemento que crea un segundo círculo azul oscuro más abajo a la derecha */
 .circle::after {
   content: "";
+  /* content: "" es obligatorio en pseudo-elementos ::before y ::after, aunque esté vacío */
   position: inherit;
+  /* inherit hereda la misma posición (fixed) del elemento padre .circle */
   right: -50vmin;
   bottom: -55vmin;
   width: inherit;
@@ -45,35 +58,47 @@ main {
   background-color: #143d81;
 }
 
+/* .card = la tarjeta blanca que contiene el formulario. overflow:hidden oculta lo que sobresale */
 .card {
   overflow: hidden;
   position: relative;
+  /* relative permite que los elementos hijos con position:absolute se posicionen respecto a esta card */
   z-index: 3;
+  /* z-index controla la superposición: 3 queda por encima del círculo de fondo */
   width: 100%;
   padding: 160px 30px 38px;
+  /* padding superior grande (160px) para dejar espacio al logo y al círculo azul decorativo */
   border-radius: 1.25rem;
+  /* border-radius redondea las esquinas = 1.25rem (~20px) */
   background-color: #fff;
   text-align: center;
   box-shadow: 0 100px 100px rgb(0 0 0 / 10%); /* Con la / podemos añadir opacidad en este caso de 10% */
 }
 
+/* .card::before = pseudo-elemento que dibuja el círculo azul grande en la parte superior de la tarjeta */
 .card::before {
   content: "";
   position: absolute;
+  /* absolute se posiciona respecto al padre con position:relative */
   background-color: #216ce7;
   top: -880px;
   left: 50%;
   width: 1000px;
   height: 1000px;
   border-radius: 50%;
+  /* border-radius: 50% convierte el cuadrado en un círculo perfecto */
   translate: -50% 0;
+  /* translate: -50% 0 lo centra horizontalmente (desplaza la mitad de su ancho hacia la izquierda) */
 }
 
+/* .card .logo = círculo blanco con borde negro que contiene el ícono, centrado en la parte superior */
 .card .logo {
   border: 1px solid black;
   position: absolute;
+  /* absolute = se posiciona libremente dentro de .card */
   display: flex;
   align-items: center;
+  /* align-items:center + justify-content:center centran el ícono dentro del círculo */
   justify-content: center;
   border-radius: 50%;
   background-color: #fff;
@@ -82,14 +107,17 @@ main {
   top: 30px;
   left: 50%;
   translate: -50% 0;
+  /* translate: -50% 0 centra horizontalmente (corrige el left:50%) */
 }
 
+/* .card .logo i = estilo del ícono de Bitcoin dentro del logo */
 .card .logo i {
   font-size: 50px;
   color: #216ce7;
   font-weight: 500;
 }
 
+/* ">" = selector de hijo directo. .card > h1 afecta solo al <h1> que está DENTRO de .card */
 .card > h1 {
   font-size: 22px;
   font-weight: 400;
@@ -97,12 +125,14 @@ main {
   color: #2a3444;
 }
 
+/* .form = el formulario usa display:grid para apilar los inputs verticalmente con separación (gap) */
 .form {
   margin: 0 0 30px;
   display: grid;
   gap: 18px;
 }
 
+/* input y button comparten el mismo ancho, alto y bordes redondeados */
 .form > input,
 .form > button {
   width: 100%;
@@ -110,25 +140,32 @@ main {
   border-radius: 28px;
 }
 
+/* Estilo de los campos de texto: borde gris claro, fuente heredada, padding interno */
 .form > input {
   border: 2px solid #e0e0e0;
   font-family: inherit;
+  /* inherit hereda la fuente del padre (Ubuntu) */
   font-size: 16px;
   padding: 0 24px;
   color: #11274c;
   transition: all 0.375s;
+  /* transition suaviza los cambios de estilo (como el hover) durante 0.375 segundos */
 }
 
+/* :hover = cuando el mouse pasa por encima, el borde se vuelve negro */
 .form > input:hover {
   border: 2px solid #000;
 }
 
+/* ::placeholder estiliza el texto provisional dentro del input (ej: "Name", "Email") */
 .form > input::placeholder {
   color: #cac8c8;
 }
 
+/* Botón de envío: azul, texto blanco, sin bordes, con letras espaciadas */
 .form > button {
   cursor: pointer;
+  /* cursor: pointer cambia el cursor a una manito al pasar sobre el botón */
   width: 100%;
   height: 50px;
   padding: 0 16px;
@@ -140,26 +177,32 @@ main {
   font-weight: 600;
   text-align: center;
   letter-spacing: 2px;
+  /* letter-spacing separa las letras (S I G N   U P) */
   transition: all 0.375s;
 }
 
+/* Al hacer hover, el botón cambia a un azul más oscuro */
 .form > button:hover {
   background-color: #143d81;
 }
 
+/* Color gris para el texto del pie de página */
 .card > footer {
   color: #7c7c7c;
 }
 
+/* El enlace "Here" dentro del footer se ve azul con transición suave */
 .card > footer > a {
   color: #216ce7;
   transition: all 0.375s;
 }
 
+/* Al pasar el mouse, el enlace se oscurece */
 .card > footer > a:hover {
   color: #143d81;
 }
 
+/* @media = media query: aplica estos estilos SOLO cuando la pantalla mide 500px o más */
 @media (width >= 500px) {
   body {
     padding: 0;
@@ -168,5 +211,6 @@ main {
   .card {
     margin: 0;
     width: 360px;
+    /* En pantallas grandes, la tarjeta tiene un ancho fijo de 360px */
   }
 }
