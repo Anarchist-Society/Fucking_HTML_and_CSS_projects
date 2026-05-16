@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- ============================================================
-  DOCUMENTO HTML – Sidebar interactiva con CSS y JavaScript
+  DOCUMENTO HTML - Sidebar interactiva con CSS y JavaScript
   ============================================================
   En este archivo definimos la ESTRUCTURA de la pagina.
   El HTML es como el "esqueleto": pone los elementos en pantalla
@@ -12,7 +12,7 @@
        pero es esencial para que funcione bien.
        Metadatos, estilos, scripts, titulo... -->
   <head>
-    <!-- charset="UTF-8" permite usar tildes, n, emojis, etc. -->
+    <!-- charset="UTF-8" permite usar tildes, 'n', signos de pregunta, etc. -->
     <meta charset="UTF-8" />
 
     <!-- viewport: le dice al navegador que adapte la pagina
@@ -21,8 +21,15 @@
     <meta name="author" content="Anarchist-Society" />
     <meta name="description" content="A fucking Sidebar" />
 
-    <!-- Boxicons: libreria de iconos (los "bxs" que ves abajo).
-         Los importamos desde internet con esta URL -->
+    <!-- Preconnect: le dice al navegador que se conecte ANTES
+         a estos servidores externos. Asi las fuentes e iconos
+         cargan mas rapido porque la conexion ya esta lista. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+
+    <!-- Boxicons: libreria de iconos (los "bx-" que ves abajo).
+         Los importamos desde internet con esta URL. -->
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -31,11 +38,8 @@
     <!-- Enlazamos nuestro archivo CSS (style.css) para darle estilo a todo -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Enlazamos nuestro archivo JavaScript (script.js) para la animacion -->
-    <script src="script.js"></script>
-
     <!-- Titulo que aparece en la pestana del navegador -->
-    <title>Fuck Sidebar</title>
+    <title>Sidebar</title>
   </head>
 
   <!-- <body>: TODO lo que se ve en la pagina va aqui dentro -->
@@ -45,108 +49,109 @@
            SIDEBAR (barra lateral)
            ==========================================================
            Esta es la barra que se abre y cierra.
-           Tiene 75px de ancho cuando esta cerrada y 240px
-           cuando se abre con el boton hamburguesa
+           Tiene 75px de ancho cuando esta cerrada (solo iconos)
+           y 240px cuando se abre con el boton hamburguesa.
+           aria-label describe la funcion de la barra para
+           lectores de pantalla (accesibilidad).
            ========================================================== -->
-      <nav class="sidebar">
+      <nav class="sidebar" aria-label="Sidebar navigation">
         <div class="sidebar-inner">
-          <!-- HEADER: el logo + boton hamburguesa -->
+
+          <!-- HEADER: contiene el logo + el boton hamburguesa -->
           <header class="sidebar-header">
             <!-- Boton hamburguesa: al hacer clic llama a toggleSidebar()
-                 que esta definida en script.js -->
+                 que esta definida en script.js.
+                 aria-expanded="false" indica que la sidebar empieza
+                 cerrada (cambiara a "true" cuando se abra). -->
             <button
               type="button"
               class="sidebar-burger"
-              aria-label="button-sidebar"
+              aria-label="Toggle sidebar menu"
+              aria-expanded="false"
               onclick="toggleSidebar()"
             >
-              <!-- bx-menu es el icono de tres rayitas (hamburguesa) -->
-              <i class="bx bx-menu"></i>
+              <!-- bx-menu es el icono de tres rayitas (hamburguesa).
+                   aria-hidden=true oculta este icono decorativo de
+                   los lectores de pantalla porque no aporta informacion -->
+              <i class="bx bx-menu" aria-hidden="true"></i>
             </button>
 
-            <!-- Logo: se oculta cuando la sidebar esta cerrada -->
-            <img src="logo.svg" alt="" class="sidebar-logo" />
+            <!-- Logo: se oculta cuando la sidebar esta cerrada
+                 (opacity: 0 en CSS). alt="" + aria-hidden=true
+                 porque es decorativo, los lectores de pantalla lo ignoran -->
+            <img src="logo.svg" alt="" class="sidebar-logo" aria-hidden="true" />
           </header>
 
           <!-- ========================================================
                MENU DE NAVEGACION
                ========================================================
                Cada boton tiene un icono (de Boxicons) y un texto.
-               El texto se oculta cuando la sidebar esta cerrada.
+               El texto se oculta cuando la sidebar esta cerrada
+               (opacity: 0 en CSS, solo se ve al abrir).
                ======================================================== -->
-          <nav class="sidebar-menu">
-            <!-- Boton Home -->
-            <button type="button">
-              <i class="bx bx-home"></i>
-              <!-- Icono de casita -->
+          <nav class="sidebar-menu" aria-label="Main menu">
+            <!-- aria-label en cada boton permite saber que hace aunque
+                 el texto <span> este oculto (accesibilidad) -->
+
+            <button type="button" aria-label="Home">
+              <i class="bx bx-home" aria-hidden="true"></i>
               <span>Home</span>
-              <!-- Texto (se oculta si la sidebar esta cerrada) -->
             </button>
 
-            <!-- Boton Accounts -->
-            <button type="button">
-              <i class="bx bx-user"></i>
-              <!-- Icono de persona -->
+            <button type="button" aria-label="Accounts">
+              <i class="bx bx-user" aria-hidden="true"></i>
               <span>Accounts</span>
             </button>
 
-            <!-- Boton Settings (tiene has-border = linea separadora arriba) -->
-            <button type="button" class="has-border">
-              <i class="bx bx-cog"></i>
-              <!-- Icono de engranaje -->
+            <!-- has-border agrega una linea separadora debajo (en CSS) -->
+            <button type="button" class="has-border" aria-label="Settings">
+              <i class="bx bx-cog" aria-hidden="true"></i>
               <span>Settings</span>
             </button>
 
-            <!-- Boton Blockchain -->
-            <button type="button">
-              <i class="bx bx-shape-circle"></i>
+            <button type="button" aria-label="Blockchain">
+              <i class="bx bx-shape-circle" aria-hidden="true"></i>
               <span>Blockchain</span>
             </button>
 
-            <!-- Boton Databases -->
-            <button type="button">
-              <i class="bx bx-data"></i>
-              <!-- Icono de base de datos -->
+            <button type="button" aria-label="Databases">
+              <i class="bx bx-data" aria-hidden="true"></i>
               <span>Databases</span>
             </button>
 
-            <!-- Boton AudioVibe -->
-            <button type="button">
-              <i class="bx bx-speaker"></i>
-              <!-- Icono de altavoz -->
+            <button type="button" aria-label="AudioVibe">
+              <i class="bx bx-speaker" aria-hidden="true"></i>
               <span>AudioVibe</span>
             </button>
 
-            <!-- Boton Soundblast (tiene has-border = linea separadora) -->
-            <button type="button" class="has-border">
-              <i class="bx bx-music"></i>
-              <!-- Icono de nota musical -->
+            <button type="button" class="has-border" aria-label="Soundblast">
+              <i class="bx bx-music" aria-hidden="true"></i>
               <span>Soundblast</span>
             </button>
 
-            <!-- Boton Folders -->
-            <button type="button">
-              <i class="bx bx-folder"></i>
-              <!-- Icono de carpeta -->
+            <button type="button" aria-label="Folders">
+              <i class="bx bx-folder" aria-hidden="true"></i>
               <span>Folders</span>
             </button>
 
-            <!-- Boton Levels -->
-            <button type="button">
-              <i class="bx bx-layer"></i>
-              <!-- Icono de capas -->
+            <button type="button" aria-label="Levels">
+              <i class="bx bx-layer" aria-hidden="true"></i>
               <span>Levels</span>
             </button>
 
-            <!-- Boton Security -->
-            <button type="button">
-              <i class="bx bx-lock"></i>
-              <!-- Icono de candado -->
+            <button type="button" aria-label="Security">
+              <i class="bx bx-lock" aria-hidden="true"></i>
               <span>Security</span>
             </button>
           </nav>
         </div>
       </nav>
     </main>
+
+    <!-- El script se carga al final con "defer".
+         defer = se descarga en paralelo mientras se carga la pagina
+         y se ejecuta SOLO cuando el HTML ya esta completamente listo.
+         Asi no bloquea la visualizacion de la pagina. -->
+    <script src="script.js" defer></script>
   </body>
 </html>
