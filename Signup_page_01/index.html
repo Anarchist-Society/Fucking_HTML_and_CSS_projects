@@ -1,7 +1,7 @@
 <!-- ============ DOCTYPE: le dice al navegador que esto es HTML5 ============ -->
 <!doctype html>
-<html lang="en">
-<!-- lang="en" indica el idioma principal (inglés) para accesibilidad y SEO -->
+<html lang="es">
+  <!-- lang="es" indica que el contenido principal está en español para accesibilidad y SEO -->
   <head>
     <meta charset="UTF-8" />
     <!-- charset="UTF-8" permite usar caracteres especiales como tildes, ñ, emojis, etc. -->
@@ -33,16 +33,17 @@
           <i class="bx bx-bitcoin"></i>
         </div>
 
-        <!-- Título principal del formulario de registro -->
-        <h1>Create Account</h1>
+        <!-- Título principal traducido a español -->
+        <h1>Crear Cuenta</h1>
 
         <!-- <form> agrupa los inputs y los envía al servidor cuando se hace clic en el botón -->
         <!-- role="form" es para que los lectores de pantalla sepan que esto es un formulario -->
         <!-- aria-labelledby="form-title" significa que este formulario está etiquetado por el span con id form-title -->
         <form class="form" role="form" aria-labelledby="form-title">
-          <span id="form-title" class="sr-only">Sign up form</span>
+          <span id="form-title" class="sr-only">Formulario de registro</span>
 
           <!-- input type="text" = campo de una sola línea. required = obligatorio. autocomplete = ayuda al navegador a rellenar -->
+          <!-- Traducido a español -->
           <input
             id="name"
             type="text"
@@ -50,10 +51,11 @@
             autocomplete="name"
             required
             aria-required="true"
-            placeholder="Name"
+            placeholder="Nombre"
           />
 
           <!-- type="email" valida automáticamente que el texto tenga formato de correo (user@dominio.com) -->
+          <!-- Traducido a español -->
           <input
             id="email"
             type="email"
@@ -61,10 +63,11 @@
             autocomplete="email"
             required
             aria-required="true"
-            placeholder="Email"
+            placeholder="Correo electrónico"
           />
 
           <!-- type="password" oculta los caracteres escritos. minlength="8" exige al menos 8 caracteres -->
+          <!-- Traducido a español -->
           <input
             id="password"
             type="password"
@@ -73,17 +76,19 @@
             required
             aria-required="true"
             minlength="8"
-            placeholder="Password"
+            placeholder="Contraseña"
           />
 
-          <!-- type="submit" = al hacer clic envía el formulario. "SIGN UP" en mayúsculas es decisión de diseño -->
-          <button type="submit">SIGN UP</button>
+          <!-- type="submit" = al hacer clic envía el formulario. "REGISTRARSE" en mayúsculas es decisión de diseño -->
+          <!-- Traducido a español -->
+          <button type="submit">REGISTRARSE</button>
         </form>
 
-        <!-- footer con enlace para "usuarios existentes" (href="#" es un placeholder, aún no lleva a ninguna parte) -->
+        <!-- footer con enlace descriptivo para "usuarios existentes" (href="#" es un placeholder, aún no lleva a ninguna parte) -->
+        <!-- "Inicia sesión" es más descriptivo que solo un "Aquí" suelto, mejorando accesibilidad y SEO -->
         <footer>
-          Existing users, sign in
-          <a href="#">Here</a>
+          ¿Ya tienes cuenta?
+          <a href="#">Inicia sesión</a>
         </footer>
       </div>
     </main>
