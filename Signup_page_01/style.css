@@ -1,216 +1,315 @@
-/* @import trae la fuente "Ubuntu" desde Google Fonts para usarla en toda la página */
+/* ===================================================================
+   @import: descarga la fuente "Ubuntu" desde Google Fonts.
+   wght = weight (grosor): 300 ligera, 400 normal, 500 seminegra, 700 negra.
+   display=swap: muestra una fuente alternativa mientras se descarga Ubuntu.
+   Los valores itálicos (italic) tienen "1" antes del peso (ej: 1,300).
+   =================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
-/* El selector universal (*) aplica estos estilos a TODOS los elementos de la página */
+/* ===================================================================
+   Selector universal (*): aplica estos estilos a TODOS los elementos
+   de la página sin excepción. Es un "reset" básico.
+   =================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border-box hace que el padding y el border NO sumen al ancho total del elemento */
+  /* box-sizing: border-box → el padding y el border NO se suman al ancho
+     total del elemento. Ej: si un elemento mide 100px de ancho y tiene
+     10px de padding, seguirá midiendo 100px (no 120px). */
 }
 
-/* html con height: 100% para que ocupe todo el alto de la ventana del navegador */
+/* ===================================================================
+   height: 100vh en <html> asegura que el documento ocupe todo el alto
+   de la ventana del navegador.
+   vh = viewport height (altura del viewport).
+   100vh = 100% del alto visible de la pantalla.
+   =================================================================== */
 html {
   height: 100vh;
 }
 
-/* body también mide 100% de alto. display: grid + place-items: center centra todo vertical y horizontalmente */
+/* ===================================================================
+   body: display grid + place-items center es el método más simple
+   y directo para centrar cualquier elemento hijo tanto horizontal
+   como verticalmente.
+   =================================================================== */
 body {
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  margin: 0;
-  padding: 0 32px;
-  background-color: #f5f5f5;
-  font-family: "Ubuntu";
-  animation: rotate 6s infinite alternate linear; /* */
+  height: 100vh;             /* 100% del alto de la ventana */
+  display: grid;             /* activa CSS Grid Layout */
+  place-items: center;       /* centra <main> horizontal y verticalmente */
+  margin: 0;                 /* elimina margen exterior por defecto */
+  padding: 0 32px;           /* 32px de relleno a los lados (útil en móvil para que no se pegue a los bordes) */
+  background-color: #f5f5f5; /* gris muy claro de fondo */
+  font-family: "Ubuntu";     /* fuente principal para toda la página */
+  animation: rotate 6s infinite alternate linear;
+  /* "rotate" = nombre de la animación (definida abajo con @keyframes)
+     6s = cada ciclo dura 6 segundos
+     infinite = se repite indefinidamente
+     alternate = va y vuelve (ida: 0° → 360°, vuelta: 360° → 0°)
+     linear = velocidad constante durante toda la animación (sin acelerar/desacelerar) */
 }
 
-/* min-width: 400px evita que el contenido se encoja demasiado en pantallas pequeñas */
+/* ===================================================================
+   min-width: 400px evita que el contenido se encoja demasiado
+   en pantallas pequeñas. Si la ventana mide menos de 400px,
+   aparecerá scroll horizontal.
+   =================================================================== */
 main {
   min-width: 400px;
 }
 
-/* .circle = círculo decorativo celeste fijo en la esquina superior izquierda */
+/* ===================================================================
+   .circle: círculo decorativo celeste en la esquina superior izquierda.
+   position: fixed → se queda fijo en la ventana incluso si hay scroll.
+   Usamos vmin para que el tamaño se adapte proporcionalmente a la pantalla.
+   =================================================================== */
 .circle {
-  position: fixed;
-  /* fixed = se queda fijo en la ventana aunque hagamos scroll */
-  top: -50vmin; /* vmin = 1% del lado más pequeño de la ventana */
-  left: -50vmin; /* vmin = 1% del lado más pequeño de la ventana */
-  width: 100vmin; /* vmin = 1% del lado más pequeño de la ventana */
-  height: 100vmin; /* vmin = 1% del lado más pequeño de la ventana */
-  border-radius: 47% 53% 61% 39% / 45% 51% 49% 55%; /* bordes irregulares para forma orgánica */
-  background-color: #65c8ff;
+  position: fixed;       /* fixed = fijo en la ventana, no se mueve al hacer scroll */
+  top: -50vmin;          /* -50vmin: sobresale por arriba (la mitad queda fuera) */
+  left: -50vmin;         /* -50vmin: sobresale por la izquierda */
+  width: 100vmin;        /* 100vmin = 100% del lado MÁS PEQUEÑO de la pantalla */
+  height: 100vmin;       /* igual que el ancho para que sea un cuadrado */
+  /* vmin: unidad relativa. 1vmin = 1% del lado MÁS PEQUEÑO de la ventana.
+     En un móvil vertical (360×640), el lado más pequeño es el ancho (360px),
+     así que 1vmin = 3.6px. En un monitor horizontal (1920×1080),
+     el lado más pequeño es el alto (1080px), así que 1vmin = 10.8px. */
+  border-radius: 47% 53% 61% 39% / 45% 51% 49% 55%;
+  /* border-radius con 8 valores (4 para X / 4 para Y) crea bordes
+     irregulares → forma orgánica que no es un círculo perfecto.
+     Los valores antes de "/" son radios horizontales (esquina sup-izq,
+     sup-der, inf-der, inf-izq). Los de después son radios verticales. */
+  background-color: #65c8ff;  /* celeste claro */
 }
 
-/* inherit -> que lo herede del padre */
-/* .circle::after = pseudo-elemento que crea un segundo círculo azul oscuro más abajo a la derecha */
+/* ===================================================================
+   inherit: esta palabra clave le dice al elemento que herede el valor
+   de la MISMA propiedad de su elemento padre.
+   Aquí .circle::after hereda position, width, height y border-radius de .circle.
+   =================================================================== */
+/* ::after = pseudo-elemento que se inserta como ÚLTIMO hijo del elemento.
+   Sirve para contenido decorativo sin necesidad de HTML adicional. */
 .circle::after {
-  content: "";
-  /* content: "" es obligatorio en pseudo-elementos ::before y ::after, aunque esté vacío */
-  position: inherit;
-  /* inherit hereda la misma posición (fixed) del elemento padre .circle */
-  right: -50vmin;
-  bottom: -55vmin;
-  width: inherit;
-  height: inherit;
-  border-radius: inherit;
-  background-color: #143d81;
+  content: "";                /* obligatorio en ::before y ::after, aunque esté vacío */
+  position: inherit;          /* hereda "fixed" de .circle */
+  right: -50vmin;             /* sobresale por la derecha en vez de por la izquierda */
+  bottom: -55vmin;            /* sobresale por abajo */
+  width: inherit;             /* hereda el ancho (100vmin) de .circle */
+  height: inherit;            /* hereda el alto (100vmin) de .circle */
+  border-radius: inherit;     /* hereda la forma irregular de .circle */
+  background-color: #143d81;  /* azul oscuro (más oscuro que el .circle principal) */
 }
 
-/* .card = la tarjeta blanca que contiene el formulario. overflow:hidden oculta lo que sobresale */
+/* ===================================================================
+   .card: la tarjeta blanca que contiene el formulario.
+   overflow: hidden → oculta cualquier contenido que sobresalga
+   (como el círculo azul enorme de .card::before).
+   =================================================================== */
 .card {
-  overflow: hidden;
+  overflow: hidden;            /* oculta lo que se salga de la tarjeta */
   position: relative;
-  /* relative permite que los elementos hijos con position:absolute se posicionen respecto a esta card */
+  /* relative: permite que los elementos hijos con position: absolute
+     se posicionen RELATIVO a esta tarjeta (no al body). */
   z-index: 3;
-  /* z-index controla la superposición: 3 queda por encima del círculo de fondo */
-  width: 100%;
+  /* z-index: controla qué elemento se ve "encima" de otro.
+     Mientras más alto el número, más al frente.
+     3 queda por encima del círculo de fondo (que no tiene z-index = 0 por defecto). */
+  width: 100%;                 /* ocupa todo el ancho del <main> */
   padding: 160px 30px 38px;
-  /* padding superior grande (160px) para dejar espacio al logo y al círculo azul decorativo */
+  /* padding: superior derecho inferior izquierdo.
+     160px arriba deja espacio para el logo y el círculo azul decorativo de .card::before */
   border-radius: 1.25rem;
-  /* border-radius redondea las esquinas = 1.25rem (~20px) */
-  background-color: #fff;
-  text-align: center;
-  box-shadow: 0 100px 100px rgb(0 0 0 / 10%); /* Con la / podemos añadir opacidad en este caso de 10% */
+  /* 1.25rem ≈ 20px (1rem = 16px por defecto).
+     rem = unidad relativa al tamaño de fuente del <html>.
+     border-radius redondea las 4 esquinas. */
+  background-color: #fff;      /* blanco */
+  text-align: center;          /* centra todo el texto dentro de la card */
+  box-shadow: 0 100px 100px rgb(0 0 0 / 10%);
+  /* box-shadow: offsetX offsetY blurRadius color.
+     Con la "/" en rgb() podemos indicar opacidad (alpha).
+     10% = muy sutil, casi transparente.
+     Desplazamiento vertical de 100px y desenfoque de 100px. */
 }
 
-/* .card::before = pseudo-elemento que dibuja el círculo azul grande en la parte superior de la tarjeta */
+/* ===================================================================
+   .card::before: pseudo-elemento que dibuja el círculo azul GRANDE
+   en la parte superior de la tarjeta (el fondo azul detrás del logo).
+   =================================================================== */
 .card::before {
-  content: "";
+  content: "";                 /* obligatorio en pseudo-elementos */
   position: absolute;
-  /* absolute se posiciona respecto al padre con position:relative */
-  background-color: #216ce7;
-  top: -880px;
-  left: 50%;
+  /* absolute: se posiciona respecto al PADRE con position: relative.
+     Como .card tiene position: relative, este círculo se posiciona
+     dentro de .card, no del body. */
+  background-color: #216ce7;   /* azul medio */
+  top: -880px;                 /* desplazado hacia arriba para que solo se vea la parte inferior */
+  left: 50%;                   /* la esquina izquierda del círculo se coloca en el 50% de la card */
   width: 1000px;
   height: 1000px;
-  border-radius: 50%;
-  /* border-radius: 50% convierte el cuadrado en un círculo perfecto */
+  border-radius: 50%;          /* 50% convierte el cuadrado en un círculo perfecto */
   translate: -50% 0;
-  /* translate: -50% 0 lo centra horizontalmente (desplaza la mitad de su ancho hacia la izquierda) */
+  /* translate desplaza el elemento respecto a su propia posición.
+     -50% en X: mueve el círculo la mitad de su ancho hacia la izquierda,
+     centrándolo perfectamente (corrige el left: 50%). */
 }
 
-/* .card .logo = círculo blanco con borde negro que contiene el ícono, centrado en la parte superior */
+/* ===================================================================
+   .card .logo: círculo blanco con borde negro que contiene el ícono
+   de Bitcoin. Está posicionado absolutamente dentro de .card.
+   =================================================================== */
 .card .logo {
-  border: 1px solid black;
+  border: 1px solid black;     /* borde negro delgado */
   position: absolute;
-  /* absolute = se posiciona libremente dentro de .card */
-  display: flex;
-  align-items: center;
-  /* align-items:center + justify-content:center centran el ícono dentro del círculo */
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #fff;
+  /* absolute: se posiciona libremente dentro de .card (porque .card tiene position: relative) */
+  display: flex;               /* activa Flexbox */
+  align-items: center;         /* centra el ícono verticalmente dentro del círculo */
+  justify-content: center;     /* centra el ícono horizontalmente */
+  border-radius: 50%;          /* círculo perfecto */
+  background-color: #fff;      /* blanco */
   height: 64px;
   width: 64px;
-  top: 30px;
-  left: 50%;
+  top: 30px;                   /* 30px desde el borde superior de la card */
+  left: 50%;                   /* la esquina izquierda del logo se coloca al 50% de la card */
   translate: -50% 0;
-  /* translate: -50% 0 centra horizontalmente (corrige el left:50%) */
+  /* translate: -50% desplaza el logo la mitad de su ancho hacia la izquierda,
+     centrándolo horizontalmente. Sin esto, el logo quedaría corrido a la derecha. */
 }
 
-/* .card .logo i = estilo del ícono de Bitcoin dentro del logo */
+/* ===================================================================
+   .card .logo i: estilo del ícono <i> de Boxicons (Bitcoin).
+   font-size controla el tamaño del ícono (no es text-size, es el tamaño
+   del glifo en la fuente de iconos).
+   =================================================================== */
 .card .logo i {
-  font-size: 50px;
-  color: #216ce7;
-  font-weight: 500;
+  font-size: 50px;          /* tamaño del ícono */
+  color: #216ce7;           /* azul medio (mismo color que el círculo grande) */
+  font-weight: 500;         /* grosor medio (500 = seminegro en la fuente de iconos) */
 }
 
-/* ">" = selector de hijo directo. .card > h1 afecta solo al <h1> que está DENTRO de .card */
+/* ===================================================================
+   ">" = selector de hijo DIRECTO.
+   .card > h1 afecta solo al <h1> que es HIJO INMEDIATO de .card.
+   Si hubiera un <h1> dentro de otro elemento dentro de .card, NO se vería afectado.
+   =================================================================== */
 .card > h1 {
-  font-size: 22px;
-  font-weight: 400;
-  margin: 0 0 30px;
-  color: #2a3444;
+  font-size: 22px;           /* tamaño del texto */
+  font-weight: 400;          /* grosor normal (no negrita) */
+  margin: 0 0 30px;          /* sin margen superior, 30px de margen inferior */
+  color: #2a3444;            /* gris azulado oscuro */
 }
 
-/* .form = el formulario usa display:grid para apilar los inputs verticalmente con separación (gap) */
+/* ===================================================================
+   .form: display grid apila los inputs verticalmente.
+   gap: separación entre cada input (18px entre uno y otro).
+   =================================================================== */
 .form {
-  margin: 0 0 30px;
-  display: grid;
-  gap: 18px;
+  margin: 0 0 30px;          /* margen inferior para separar del footer */
+  display: grid;             /* activa Grid Layout */
+  gap: 18px;                 /* espacio entre los elementos hijos del formulario */
 }
 
-/* input y button comparten el mismo ancho, alto y bordes redondeados */
+/* ===================================================================
+   Selector múltiple: input y button comparten las mismas propiedades
+   de ancho, alto y bordes redondeados.
+   La coma (,) permite aplicar el mismo estilo a varios selectores.
+   =================================================================== */
 .form > input,
 .form > button {
-  width: 100%;
-  height: 50px;
-  border-radius: 28px;
+  width: 100%;               /* ocupan todo el ancho del formulario */
+  height: 50px;              /* altura fija de 50 píxeles */
+  border-radius: 28px;       /* bordes redondeados (28px ≈ pastilla) */
 }
 
-/* Estilo de los campos de texto: borde gris claro, fuente heredada, padding interno */
+/* ===================================================================
+   Estilo de los campos de texto (input): borde gris claro, fuente
+   heredada del body, padding interno y color de texto azul oscuro.
+   =================================================================== */
 .form > input {
-  border: 2px solid #e0e0e0;
+  border: 2px solid #e0e0e0;  /* borde gris claro */
   font-family: inherit;
-  /* inherit hereda la fuente del padre (Ubuntu) */
-  font-size: 16px;
-  padding: 0 24px;
-  color: #11274c;
+  /* inherit: hereda la fuente del padre (Ubuntu en este caso).
+     Por defecto los inputs usan una fuente del sistema, pero con inherit
+     forzamos que usen la misma que el resto de la página. */
+  font-size: 16px;             /* tamaño de letra */
+  padding: 0 24px;             /* relleno horizontal de 24px a cada lado */
+  color: #11274c;              /* color del texto escrito (azul oscuro) */
   transition: all 0.375s;
-  /* transition suaviza los cambios de estilo (como el hover) durante 0.375 segundos */
+  /* transition: suaviza los cambios de estilo durante 0.375 segundos.
+     "all" significa que cualquier propiedad que cambie (border, color, etc.)
+     lo hará de forma gradual, no instantánea.
+     0.375s es la duración de la transición. */
 }
 
-/* :hover = cuando el mouse pasa por encima, el borde se vuelve negro */
+/* :hover = pseudo-clase que se activa cuando el mouse pasa por encima.
+   Aquí el borde cambia de gris claro a negro. */
 .form > input:hover {
-  border: 2px solid #000;
+  border: 2px solid #000;      /* borde negro al pasar el mouse */
 }
 
-/* ::placeholder estiliza el texto provisional dentro del input (ej: "Name", "Email") */
+/* ::placeholder = pseudo-elemento que estiliza el texto provisional
+   que aparece dentro del input antes de escribir (ej: "Nombre", "Correo electrónico"). */
 .form > input::placeholder {
-  color: #cac8c8;
+  color: #cac8c8;              /* gris claro para el texto de placeholder */
 }
 
-/* Botón de envío: azul, texto blanco, sin bordes, con letras espaciadas */
+/* ===================================================================
+   Botón de envío: azul, texto blanco, sin bordes, con letras espaciadas
+   (letter-spacing). cursor: pointer cambia el cursor a una manito.
+   =================================================================== */
 .form > button {
-  cursor: pointer;
-  /* cursor: pointer cambia el cursor a una manito al pasar sobre el botón */
+  cursor: pointer;             /* cursor tipo mano al pasar sobre el botón */
   width: 100%;
   height: 50px;
-  padding: 0 16px;
-  background-color: #216ce7;
-  color: #f9f9f9;
-  border: none;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 0 16px;             /* relleno horizontal para que el texto no toque los bordes */
+  background-color: #216ce7;   /* azul medio */
+  color: #f9f9f9;              /* texto casi blanco */
+  border: none;                /* sin borde */
+  font-family: inherit;        /* hereda Ubuntu */
+  font-size: 1rem;             /* 1rem = 16px (tamaño base del navegador) */
+  font-weight: 600;            /* seminegro (600 es más grueso que 500) */
   text-align: center;
-  letter-spacing: 2px;
-  /* letter-spacing separa las letras (S I G N   U P) */
-  transition: all 0.375s;
+  letter-spacing: 2px;         /* espacio EXTRA entre letras → "REGISTRARSE" se ve más separado */
+  transition: all 0.375s;      /* transición suave al hacer hover */
 }
 
-/* Al hacer hover, el botón cambia a un azul más oscuro */
+/* Al pasar el mouse sobre el botón, cambia a un azul más oscuro */
 .form > button:hover {
-  background-color: #143d81;
+  background-color: #143d81;   /* azul oscuro */
 }
 
-/* Color gris para el texto del pie de página */
+/* ===================================================================
+   Color gris para el texto del pie de página.
+   footer es un elemento semántico de HTML5.
+   =================================================================== */
 .card > footer {
-  color: #7c7c7c;
+  color: #7c7c7c;              /* gris medio */
 }
 
-/* El enlace "Here" dentro del footer se ve azul con transición suave */
+/* ===================================================================
+   El enlace <a> dentro del footer: color azul con transición suave.
+   =================================================================== */
 .card > footer > a {
-  color: #216ce7;
-  transition: all 0.375s;
+  color: #216ce7;              /* azul medio (mismo que el botón) */
+  transition: all 0.375s;      /* transición suave al hacer hover */
 }
 
-/* Al pasar el mouse, el enlace se oscurece */
+/* Al pasar el mouse sobre el enlace, se oscurece */
 .card > footer > a:hover {
-  color: #143d81;
+  color: #143d81;              /* azul oscuro (mismo que hover del botón) */
 }
 
-/* @media = media query: aplica estos estilos SOLO cuando la pantalla mide 500px o más */
+/* ===================================================================
+   @media (media query): aplica estos estilos SOLO cuando se cumple
+   la condición entre paréntesis.
+   (width >= 500px) → se activa cuando la pantalla mide 500px o MÁS.
+   =================================================================== */
 @media (width >= 500px) {
   body {
-    padding: 0;
+    padding: 0;                /* elimina el padding lateral en pantallas grandes */
   }
 
   .card {
-    margin: 0;
-    width: 360px;
-    /* En pantallas grandes, la tarjeta tiene un ancho fijo de 360px */
+    margin: 0;                 /* elimina margen */
+    width: 360px;              /* ancho fijo en pantallas grandes */
   }
 }
