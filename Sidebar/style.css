@@ -1,14 +1,48 @@
+/* ============================================================
+   HOJA DE ESTILOS (CSS) - Sidebar interactiva
+   ============================================================
+   El CSS es como la "ropa" de la pagina: le da colores,
+   tamanos, posiciones y animaciones a los elementos HTML.
+   Todo lo que escribimos aca afecta al index.html.
+   ============================================================ */
+
+/* -------------------------------------------------------
+   1. IMPORTAR FUENTE desde Google Fonts
+   -------------------------------------------------------
+   "Ubuntu" es la tipografia que usan los botones.
+   Importamos varios pesos (300, 400, 500, 700) y
+   sus versiones italicas.
+   ------------------------------------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
+/* -------------------------------------------------------
+   2. RESETEO GENERAL (* = todos los elementos)
+   -------------------------------------------------------
+   box-sizing: border-box -> hace que el padding y el borde
+   NO agranden el tamano total del elemento. Asi es mas
+   facil calcular anchos y altos.
+   ------------------------------------------------------- */
 * {
   box-sizing: border-box;
 }
 
+/* -------------------------------------------------------
+   3. ESTILOS DEL BODY (el cuerpo de la pagina)
+   -------------------------------------------------------
+   - margin: 0 -> quitamos el margen que trae el body por defecto
+   - background-color -> fondo oscuro (#121212 = negro azabache)
+   ------------------------------------------------------- */
 body {
   margin: 0;
   background-color: #121212;
 }
 
+/* -------------------------------------------------------
+   4. RESETEO DE BOTONES
+   -------------------------------------------------------
+   Quitamos el fondo, borde y padding que traen los botones
+   por defecto. cursor: pointer -> la manita al hacer hover.
+   ------------------------------------------------------- */
 button {
   background-color: transparent;
   border: 0;
@@ -16,6 +50,23 @@ button {
   cursor: pointer;
 }
 
+/* ============================================================
+   SIDEBAR (la barra lateral)
+   ============================================================ */
+
+/* -------------------------------------------------------
+   5. .sidebar - la barra lateral
+   -------------------------------------------------------
+   - position: absolute -> la sacamos del flujo normal
+     y la posicionamos donde queramos.
+   - top: 0 / left: 0 -> pegada a la esquina superior izquierda.
+   - width: 75px -> se ve angosta (solo los iconos).
+   - height: 100% -> ocupa todo el alto de la pagina.
+   - overflow: hidden -> esconde todo lo que sobresale
+     (los textos del menu cuando esta cerrada).
+   - transition -> animacion suave de 0.4 segundos
+     cuando cambia de tamano (al abrir/cerrar).
+   ------------------------------------------------------- */
 .sidebar {
   position: absolute;
   overflow: hidden;
@@ -27,10 +78,24 @@ button {
   transition: all 0.4s;
 }
 
+/* -------------------------------------------------------
+   6. .open .sidebar - cuando la sidebar esta ABIERTA
+   -------------------------------------------------------
+   Cuando al <body> se le anade la clase "open" (con JavaScript),
+   la sidebar se expande a 240px de ancho mostrando los textos.
+   ------------------------------------------------------- */
 body.open .sidebar {
   width: 240px;
 }
 
+/* -------------------------------------------------------
+   7. .sidebar-inner - contenedor interno
+   -------------------------------------------------------
+   Es un div interno de 300px de ancho (mas ancho que la
+   sidebar). Sirve para que los textos del menu queden
+   OCULTOS gracias al overflow: hidden de .sidebar.
+   Cuando la sidebar se abre, se ve el contenido.
+   ------------------------------------------------------- */
 .sidebar-inner {
   position: absolute;
   top: 0;
@@ -38,6 +103,15 @@ body.open .sidebar {
   width: 300px;
 }
 
+/* -------------------------------------------------------
+   8. .sidebar-header - la cabecera de la sidebar
+   -------------------------------------------------------
+   - display: flex -> los hijos (boton + logo) se alinean
+     horizontalmente uno al lado del otro.
+   - align-items: center -> centra los hijos verticalmente.
+   - background-color: rgba(0,0,0,0.1) -> fondo negro
+     muy suave y semitransparente.
+   ------------------------------------------------------- */
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -48,10 +122,19 @@ body.open .sidebar {
   transition: all 0.4s;
 }
 
+/* Al pasar el mouse sobre el header, aparece
+   un borde izquierdo gris claro */
 .sidebar-header:hover {
   border-left: 3px solid #bdbdbd;
 }
 
+/* -------------------------------------------------------
+   9. .sidebar-burger - el boton hamburguesa
+   -------------------------------------------------------
+   - display: grid + place-items: center -> centra
+     el icono en medio del boton.
+   - 70x70px -> area cuadrada para hacer clic facilmente.
+   ------------------------------------------------------- */
 .sidebar-burger {
   height: 70px;
   width: 70px;
@@ -59,6 +142,12 @@ body.open .sidebar {
   place-items: center;
 }
 
+/* -------------------------------------------------------
+   ESTILO DEL ICONO HAMBURGUESA
+   -------------------------------------------------------
+   Con > i seleccionamos el <i> que esta DENTRO del boton.
+   color: #f9f9f9 -> blanco casi puro.
+   ------------------------------------------------------- */
 .sidebar-burger > i,
 body.open .sidebar-burger > i {
   font-size: 25px;
@@ -66,27 +155,65 @@ body.open .sidebar-burger > i {
   transition: all 0.4s;
 }
 
+/* hover -> cuando pasas el mouse, el icono se pone gris */
 .sidebar-burger:hover > i,
 body.open .sidebar-burger:hover > i {
   color: #bdbdbd;
 }
 
+/* -------------------------------------------------------
+   .sidebar-logo - el logotipo
+   -------------------------------------------------------
+   - opacity: 0 -> el logo esta INVISIBLE por defecto
+     (solo se ve cuando la sidebar esta abierta)
+   - transition -> animacion suave al aparecer/desaparecer
+   ------------------------------------------------------- */
 .sidebar-logo {
   height: 20px;
   opacity: 0;
   transition: all 0.4s;
 }
 
+/* -------------------------------------------------------
+   .open .sidebar-logo - logo visible al abrir
+   -------------------------------------------------------
+   - opacity: 1 -> se vuelve visible
+   - filter: brightness(0) invert(1) -> convierte el logo
+     a color blanco (util si el logo original es oscuro)
+   ------------------------------------------------------- */
 body.open .sidebar-logo {
   opacity: 1;
   filter: brightness(0) invert(1);
   transition: all 0.4s;
 }
 
+/* ============================================================
+   MENU DE NAVEGACION
+   ============================================================ */
+
+/* -------------------------------------------------------
+   .sidebar-menu - el contenedor de los botones
+   -------------------------------------------------------
+   display: grid -> coloca los botones uno debajo del otro
+   (en una sola columna).
+   ------------------------------------------------------- */
 .sidebar-menu {
   display: grid;
 }
 
+/* -------------------------------------------------------
+   CADA BOTON DEL MENU
+   -------------------------------------------------------
+   - display: flex -> icono y texto se ponen en fila
+   - gap: 12px -> separacion entre icono y texto
+   - align-items: center -> centrados verticalmente
+   - height: 55px -> todos los botones miden lo mismo
+   - font-family: Ubuntu -> la fuente que importamos
+   - letter-spacing: 2px -> espacio extra entre letras
+   - padding: 0 22px -> espacio a los lados
+   - border-left: 3px solid transparent -> deja espacio
+     para que al hacer hover aparezca un borde izquierdo
+   ------------------------------------------------------- */
 .sidebar-menu > button {
   color: #f9f9f9;
   display: flex;
@@ -102,33 +229,58 @@ body.open .sidebar-logo {
   transition: all 0.4s;
 }
 
+/* hover -> borde izquierdo blanco al pasar el mouse */
 .sidebar-menu > button:hover {
   border-left: 3px solid #f9f9f9;
 }
 
+/* -------------------------------------------------------
+   .has-border - separador entre secciones
+   -------------------------------------------------------
+   Algunos botones tienen esta clase para mostrar una
+   linea delgada debajo que separa grupos de opciones.
+   ------------------------------------------------------- */
 .sidebar-menu > button.has-border {
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 1rem;
 }
 
+/* -------------------------------------------------------
+   ICONOS DENTRO DE LOS BOTONES
+   -------------------------------------------------------
+   > i -> selecciona el <i> (icono) que esta dentro del <button>
+   ------------------------------------------------------- */
 .sidebar-menu > button > i {
   font-size: 25px;
   color: #f9f9f9;
   transition: all 0.4s;
 }
 
+/* hover sobre iconos y textos */
 .sidebar-menu > button.hover > i,
 .sidebar-menu > button:hover > span {
   color: #bdbdbd;
 }
 
+/* -------------------------------------------------------
+   TEXTO DENTRO DE LOS BOTONES
+   -------------------------------------------------------
+   - opacity: 0 -> el texto esta OCULTO por defecto
+     (solo se ven los iconos cuando la sidebar esta cerrada)
+   ------------------------------------------------------- */
 .sidebar-menu > button > span {
   color: #f9f9f9;
   opacity: 0;
   transition: all 0.4s;
 }
 
+/* -------------------------------------------------------
+   .open .sidebar-menu > button > span
+   -------------------------------------------------------
+   Cuando la sidebar esta abierta (body.open), el texto
+   se vuelve visible (opacity: 1).
+   ------------------------------------------------------- */
 body.open .sidebar-menu > button > span {
   opacity: 1;
   transition: all 0.4s;
